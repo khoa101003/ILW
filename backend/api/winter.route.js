@@ -5,7 +5,7 @@ const router = express.Router()
 
 //router.route("/movie/:id").get(winterCtrl.apiGetwinter)
 router.route("/new").post(winterCtrl.apiPostwinter)
-router.route("/random")
+router.route("/random/:username")
     .get(winterCtrl.apiGetrandomwinter)
 //    .put(winterCtrl.apiUpdatewinter)
 router.route("/delete")

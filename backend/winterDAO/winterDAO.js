@@ -27,8 +27,9 @@ export default class winterDAO {
     }
   }
 
-  static async addwinter(url) {
+  static async addwinter(url, username) {
     try {
+      winter = await connn.db("user").collection(username);
       const winterDoc = {
         url: url,
       }
@@ -41,9 +42,10 @@ export default class winterDAO {
     }
   }
 
-  static async getrandomwinter() {
+  static async getrandomwinter(username) {
     try {
       // Get the total count of documents in the collection
+      winter = await connn.db("user").collection(username);
       const count = await winter.countDocuments();
 
       if (count == 0) {
@@ -64,9 +66,10 @@ export default class winterDAO {
     }
   }
 
-  static async deletewinter(winterUrl) {
+  static async deletewinter(winterUrl, username) {
 
     try {
+      winter = await connn.db("user").collection(username);
       const deleteResponse = await winter.deleteOne({
         url: winterUrl,
       })
@@ -89,7 +92,6 @@ export default class winterDAO {
 
       if (username === loginRes.username && password === loginRes.password) {
         try {
-          winter = await connn.db("user").collection(username);
           return Promise.resolve({ success: true, message: "Login successful" });
         } catch (e) {
           console.error(`Unable to establish collection handles in userDAO: ${e}`);

@@ -21,8 +21,10 @@ async function handleLogin() {
         if (res.status == 401) {
             throw new Error("Invalid username or password");
         }
+        localStorage.setItem("currentUser", username);
+        console.log("login: " + GLOBALS.currentUser);
         status.innerText = 'login successful';
-        setTimeout(() => { location.replace("./index.html"); }, 100);
+        setTimeout(() => { location.replace("./index.html"); }, 1000);
     })
         .then(res => {
 

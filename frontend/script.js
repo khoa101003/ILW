@@ -13,12 +13,12 @@ const username = document.getElementById("username")
 
 function init() {
     status.innerText = APILINK
-    fetch(APILINK + "/random", {
+    fetch(APILINK + "/random/" + localStorage.getItem("currentUser"), {
         method: "GET",
         headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
-        },
+        }
     })
         .then(response => {
             if (!response.ok) {
@@ -49,7 +49,7 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 function randomWinter() {
-    fetch(APILINK + "/random", {
+    fetch(APILINK + "/random/" + localStorage.getItem("currentUser"), {
         method: "GET",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -99,6 +99,7 @@ logout_button.onclick = () => {
         .then(res => {
             console.log(res);
             location.replace("./login.html");
+            GLOBALS.currentUser = null;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -114,7 +115,7 @@ d_button.onclick = () => {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "url": currentImageUrl })
+            body: JSON.stringify({ "url": currentImageUrl, "username": localStorage.getItem("currentUser") })
         });
     } catch (error) {
         console.error('Error:', error);
@@ -136,7 +137,8 @@ form.addEventListener("submit", (e) => {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "url": linkItem })
+            body: JSON.stringify({ "url": linkItem, "username": localStorage.getItem("currentUser") })
+
         }).then(res => res.json())
             .then(res => {
                 console.log(res);

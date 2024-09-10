@@ -5,7 +5,7 @@ export default class winterController {
     try {
       const url = req.body.url
       const reviewResponse = await winterDAO.addwinter(
-        url
+        url, req.body.username
       )
       //console.log("winterController url: " + url);
       //console.log(req.url);
@@ -18,11 +18,12 @@ export default class winterController {
   static async apiGetrandomwinter(req, res, next) {
     try {
       console.log("in randomwinter");
-      let winter = await winterDAO.getrandomwinter()
+      let winter = await winterDAO.getrandomwinter(req.params.username)
       if (winter == null) {
         res.status(404).json({ error: "Not found", url: null })
         return
       }
+      console.log("username: " + req.params.username);
       console.log("randomwinter: " + winter);
       res.json({ url: winter })
     } catch (e) {
@@ -33,7 +34,7 @@ export default class winterController {
   static async apiDeletewinter(req, res, next) {
     try {
       console.log("delete: " + req.body.url)
-      const deleteRes = await winterDAO.deletewinter(req.body.url);
+      const deleteRes = await winterDAO.deletewinter(req.body.url, req.body.username);
     } catch (e) {
       console.log(`api, ${e}`);
       res.status(500).json({ error: e });
