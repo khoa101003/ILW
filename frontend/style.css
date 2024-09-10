@@ -1,0 +1,32 @@
+.top {
+  background-color: aqua;
+  max-width: fit-content;
+  width: fit-content;
+  margin: auto;
+  border-radius: 10px;
+  border: 0px groove red;
+}
+img {
+  border-radius: 10%;
+  max-width: 400px;
+  max-height: 500px;
+  margin: auto;
+  padding: 0;
+}
+form {
+  padding: 10px;
+  margin: 0px;
+}
+div {
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  border: 0px solid red;
+  align-items: center;
+}
+body {
+  background-image: url("bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
